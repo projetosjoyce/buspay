@@ -1,0 +1,27 @@
+<div *ngIf="product"
+     class="card">
+
+    <div class="card-header">
+        <button type="button"
+                class="btn-close"
+                (click)="closeModal()"
+                aria-label="Close"></button>
+        <h2 class="text-center">Alteração de produtos:</h2>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <h5 class="card-title text-center mb-5">Código produto: <strong>#{{product!.id}}</strong></h5>
+            </div>
+            <div class="col">
+                <h5 *ngIf="product!.rating"
+                    class="card-title text-center mb-5"
+                    [ngClass]="product!.rating!.count > 0 ? 'text-success' : 'text-danger'">
+                    Em estoque: {{product!.rating!.count}}</h5>
+            </div>
+        </div>
+        <app-product-form [product]="product!"
+                          (sendProductChanges)="emitProductChanges($event)"
+                          [viewmode]="viewmode"></app-product-form>
+    </div>
+</div>

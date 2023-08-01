@@ -1,0 +1,90 @@
+<div class="container text-center">
+    <div class="row mt-4">
+        <h1>Listagem de produtos</h1>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text"
+                      id="addon-wrapping"><i class="bi bi-search"></i></span>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Busca por nome ou categoria..."
+                       aria-label="Busca de produtos por nome"
+                       aria-describedby="addon-wrapping"
+                       [(ngModel)]="productSearch"
+                       (ngModelChange)="filterTableResults()">
+            </div>
+        </div>
+
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col"
+                            width="130px"
+                            (click)="sortBy('id')">ID <span class="ms-2"><i class="bi bi-arrow-down-up"></i></span></th>
+                        <th scope="col"
+                            width="130px">Imagem </th>
+                        <th scope="col"
+                            width="130px"
+                            (click)="sortBy('title')">Nome <span class="ms-2"><i class="bi bi-arrow-down-up"></i></span>
+                        </th>
+                        <th scope="col"
+                            width="130px"
+                            (click)="sortBy('price')">Preço <span class="ms-2"><i
+                                   class="bi bi-arrow-down-up"></i></span></th>
+                        <th scope="col"
+                            width="130px"
+                            (click)="sortBy('category')">Categoria <span class="ms-2"><i
+                                   class="bi bi-arrow-down-up"></i></span></th>
+                        <th width="80px"
+                            scope="col">Ações </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of productsTable">
+                        <th class="align-middle"
+                            scope="row">{{product.id}}</th>
+                        <td class="align-middle"><img height="50px"
+                                 [src]="product.image"
+                                 alt=""></td>
+                        <td class="align-middle">{{product.title}}</td>
+                        <td class="align-middle">{{product.price | currency: 'BRL'}}</td>
+                        <td class="align-middle">{{product.category}}</td>
+                        <td class="align-middle">
+                            <div class="row-cols-3">
+                                <div class="col-auto">
+                                    <button type="button"
+                                            placement="bottom"
+                                            ngbTooltip="Exibir detalhes do produto"
+                                            (click)="showProduct(product)"
+                                            class="btn btn-link">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+
+                                </div>
+                                <div class="col-auto"><button type="button"
+                                            placement="bottom"
+                                            ngbTooltip="Editar produto"
+                                            (click)="editProduct(product)"
+                                            class="btn btn-link">
+                                        <i class="bi bi-pencil"></i>
+                                    </button></div>
+                                <div class="col-auto"><button type="button"
+                                            placement="bottom"
+                                            ngbTooltip="Remover produto"
+                                            (click)="deleteProduct(product.id)"
+                                            class="btn btn-link">
+                                        <i class="bi bi-trash"></i>
+                                    </button></div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
